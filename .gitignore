@@ -1,6 +1,7 @@
 # Folders
 .idea/
 .gradle/
+.vscode/
 build/
 target/
 

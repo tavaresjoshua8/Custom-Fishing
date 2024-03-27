@@ -18,11 +18,16 @@
 package net.momirealms.customfishing.compatibility.level;
 
 import com.gamingmesh.jobs.Jobs;
+import com.gamingmesh.jobs.actions.ItemActionInfo;
+import com.gamingmesh.jobs.container.ActionType;
 import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobProgression;
 import com.gamingmesh.jobs.container.JobsPlayer;
 import net.momirealms.customfishing.api.integration.LevelInterface;
+
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
@@ -31,9 +36,16 @@ public class JobsRebornImpl implements LevelInterface {
     @Override
     public void addXp(Player player, String target, double amount) {
         JobsPlayer jobsPlayer = Jobs.getPlayerManager().getJobsPlayer(player);
-        Job job = Jobs.getJob(target);
-        if (jobsPlayer != null && jobsPlayer.isInJob(job))
-            Jobs.getPlayerManager().addExperience(jobsPlayer, job, amount);
+        Jobs.action(
+            jobsPlayer,
+            new ItemActionInfo(
+                new ItemStack(Material.COD, 1), 
+                ActionType.FISH
+            )
+        );
+        // Job job = Jobs.getJob(target);
+        // if (jobsPlayer != null && jobsPlayer.isInJob(job))
+        //     Jobs.getPlayerManager().addExperience(jobsPlayer, job, amount);
     }
 
     @Override
